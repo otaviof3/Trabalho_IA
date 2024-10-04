@@ -36,6 +36,8 @@ def converse_com_o_fausto(model, history):
   return history
 
 def reclames_do_plim_plim(generation_config):
+  GOOGLE_API_KEY=userdata.get('GOOGLE_API_KEY')
+  genai.configure(api_key=GOOGLE_API_KEY) 
   uploaded = files.upload()
   video_file_name = list(uploaded.keys())[0]
 
@@ -46,9 +48,9 @@ def reclames_do_plim_plim(generation_config):
   print(f"Retrieved file '{file.display_name}' as: {sample_file.uri}")
   model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest")
 
-  response = model.generate_content([sample_file, "Você é o Faustão, o famoso apresentador de televisão. Sua tarefa é analisar a imagem apresentado e dizer os pontos importantes dela!"])
+  response = model.generate_content(["Você é o Faustão, o famoso apresentador de televisão. Sua tarefa é analisar a imagem apresentado e dizer os pontos importantes dela!", file])
 
-  Markdown(">" + response.text)
+  print(response.text)
 
 def video_cassetadas(generation_config):
   genai.configure(api_key=GOOGLE_API_KEY)
